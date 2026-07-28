@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepika's Mystery Memory Box 🎁</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #9333ea;
+            --accent: #f472b6;
+            --bg: linear-gradient(135deg, #0f172a 0%, #2e1065 50%, #1e1b4b 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        /* Container & Card Styles */
+        .box-container {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            display: none;
+            animation: popup 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .step-card.active {
+            display: block;
+        }
+
+        @keyframes popup {
+            0% { opacity: 0; transform: scale(0.8) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Titles & Text */
+        h2 {
+            color: #c084fc;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        p.subtitle {
+            font-size: 1.1rem;
+            color: #e2e8f0;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        /* Buttons */
+        .btn-next {
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 25px;
+            box-shadow: 0 5px 15px rgba(168, 85, 247, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-next:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(236, 72, 153, 0.6);
+        }
+
+        /* Gift 1: Photo Grid */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        /* Gift 2: Song Links */
+        .song-btn {
+            display: block;
+            background: rgba(255,255,255,0.1);
+            color: #f472b6;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 12px;
+            margin: 10px 0;
+            border: 1px solid rgba(244, 114, 182, 0.3);
+            font-weight: 600;
+        }
+
+        /* Gift 3: Message Cards */
+        .msg-item {
+            background: rgba(255,255,255,0.05);
+            padding: 12px 16px;
+            border-left: 4px solid #c084fc;
+            margin-bottom: 10px;
+            border-radius: 0 10px 10px 0;
+            text-align: left;
+        }
+
+        /* Gift 4: Funny Badges */
+        .funny-tag {
+            display: inline-block;
+            background: rgba(236, 72, 153, 0.2);
+            color: #f472b6;
+            padding: 8px 14px;
+            border-radius: 20px;
+            margin: 5px;
+            font-weight: 600;
+        }
+
+        /* Gift 5: Compliments List */
+        .compliment-box {
+            max-height: 250px;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        .compliment-item {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.95rem;
+        }
+
+        /* Gift 6: Final Letter */
+        .letter-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            line-height: 1.6;
+            color: #fbcfe8;
+        }
+
+        .gift-box-icon {
+            font-size: 80px;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box-container">
+
+        <!-- Intro Screen -->
+        <div class="step-card active" id="step-0">
+            <div class="gift-box-icon" onclick="nextStep(1)">🎁</div>
+            <h2>Special Gift For You!</h2>
+            <p class="subtitle">I created a mystery memory box for you... Tap the gift box to unlock it!</p>
+            <button class="btn-next" onclick="nextStep(1)">Open Surprise ➔</button>
+        </div>
+
+        <!-- Gift 1 -->
+        <div class="step-card" id="step-1">
+            <h2>📸 Gift 1 – Childhood Memories</h2>
+            <p class="subtitle">"From this little smile... to the person who became my safe place. 💜"</p>
+            <div class="photo-grid">
+                <div class="photo-card"><img src="photo1.jpg" alt="Memory 1" onerror="this.src='https://via.placeholder.com/200?text=Photo+1'"></div>
+                <div class="photo-card"><img src="photo2.jpg" alt="Memory 2" onerror="this.src='https://via.placeholder.com/200?text=Photo+2'"></div>
+                <div class="photo-card"><img src="photo3.jpg" alt="Memory 3" onerror="this.src='https://via.placeholder.com/200?text=Photo+3'"></div>
+                <div class="photo-card"><img src="photo4.jpg" alt="Memory 4" onerror="this.src='https://via.placeholder.com/200?text=Photo+4'"></div>
+            </div>
+            <button class="btn-next" onclick="nextStep(2)">Next Mystery ➔</button>
+        </div>
+
+        <!-- Gift 2 -->
+        <div class="step-card" id="step-2">
+            <h2>🎵 Gift 2 – Our Songs</h2>
+            <p class="subtitle">"Every time I hear these songs... I remember you." 🎧💜</p>
+            <a href="https://youtu.be/6Jr472oaKvY?si=dWVS2o90lJm_cbqW" target="_blank" class="song-btn">▶ Play Song 1</a>
+            <a href="https://youtu.be/UVYApsOcdtc?si=XyLS72P1rV8yyhgI" target="_blank" class="song-btn">▶ Play Song 2</a>
+            <button class="btn-next" onclick="nextStep(3)">Next Mystery ➔</button>
+        </div>
+
+        <!-- Gift 3 -->
+        <div class="step-card" id="step-3">
+            <h2>💜 Gift 3 – Heart Messages</h2>
+            <div class="msg-item">You are my comfort zone, always. 🫂</div>
+            <div class="msg-item">You're not my blood sister... but my heart never cared about blood.</div>
+            <div class="msg-item">You are my second mother. ❤️</div>
+            <div class="msg-item">Whenever life gets hard, I know you're just one message away.</div>
+            <div class="msg-item">Thank you for choosing me as your little brother.</div>
+            <button class="btn-next" onclick="nextStep(4)">Next Mystery ➔</button>
+        </div>
+
+        <!-- Gift 4 -->
+        <div class="step-card" id="step-4">
+            <h2>😂 Gift 4 – Funny Corner</h2>
+            <div>
+                <span class="funny-tag">Nee oru Korathiii 😝</span>
+                <span class="funny-tag">Pichakaariii 😂</span>
+                <span class="funny-tag">Panni Kuttyyy 🐷💗</span>
+                <span class="funny-tag">Kutty Papaaah 🤏🏻😹</span>
+                <span class="funny-tag">Mendallll 🤣</span>
+            </div>
+            <p style="margin-top: 20px; font-weight: 600; color: #fbbf24;">Aana... En favourite Mendal nee dhaan. 💜</p>
+            <button class="btn-next" onclick="nextStep(5)">Next Mystery ➔</button>
+        </div>
+
+        <!-- Gift 5 -->
+        <div class="step-card" id="step-5">
+            <h2>🌸 Gift 5 – Compliments</h2>
+            <div class="compliment-box">
+                <div class="compliment-item">✨ You're the kindest person I've ever met.</div>
+                <div class="compliment-item">😊 Your smile can make anyone's day better.</div>
+                <div class="compliment-item">🤍 Thank you for caring for me like your own little brother.</div>
+                <div class="compliment-item">♾️ You're the definition of unconditional love.</div>
+                <div class="compliment-item">🎁 You're one of the biggest blessings in my life.</div>
+                <div class="compliment-item">❤️ No matter how old we become, you'll always be my second mother.</div>
+                <div class="compliment-item">🍀 I'm lucky to have a sister like you.</div>
+                <div class="compliment-item">🌟 You make ordinary moments feel special.</div>
+                <div class="compliment-item">🙌 Thank you for always believing in me.</div>
+                <div class="compliment-item">💜 I hope you always smile, because your smile is priceless.</div>
+            </div>
+            <button class="btn-next" onclick="nextStep(6)">Final Surprise 💌 ➔</button>
+        </div>
+
+        <!-- Gift 6 -->
+        <div class="step-card" id="step-6">
+            <h2>✨ Gift 6 – Final Secret Letter 💌</h2>
+            <div class="letter-text">
+                "Family isn't always about blood. Sometimes, it's about the people who choose to stand beside you no matter what.<br><br>
+                Thank you for being my non-blood sister... my comfort zone... my second mother... and one of the most precious people in my life.<br><br>
+                No matter where life takes us, you'll always have a special place in my heart." 💜
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function nextStep(stepNum) {
+            document.querySelectorAll('.step-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.getElementById('step-' + stepNum).classList.add('active');
+        }
+    </script>
+</body>
+</html>
